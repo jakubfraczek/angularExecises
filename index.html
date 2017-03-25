@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SDA">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="users">
+    <!--{{hello | uppercase}}-->
+    <!--<input ng-model="hello">-->
+    <!--<p ng-bind="hello"></p>-->
+    <!--<p ng-repeat="user in users | limitTo:4" ng-bind="user"></p>-->
+
+    <!--wyszuka wyłącznie po username-->
+    <input ng-model="search.username">
+
+    <!-- pentla for each-->
+    <!--<p ng-repeat="user in users | filter:search" ng-bind="user"></p>-->
+
+    <!--if w angular, fizycznie usuwa ze strony, z html-->
+    <!--<p ng-if=""></p>-->
+
+    <!--if w angular, ukrywa element w html, jest szybsze i tańsze-->
+    <!--<p ng-show=""></p>-->
+
+    <input type="checkbox" ng-model="all"> all
+
+    <p ng-repeat="user in users | filter:search | limitTo:limit">
+        <!--wyswietli wartosci wszystkich atrybutow w petli-->
+        <!--user: {{user}}, index: {{$index}}, odd: {{$odd}}, even: {{$even}},-->
+
+        <!--pokaże tylko nieparzyste-->
+        <!--<span ng-bind="user" ng-show="$odd"></span>-->
+
+        <!--w zależności od -->
+        <span ng-show="all || $odd">
+            <span ng-bind="user.username"></span>, role: <span ng-bind="user.role"></span>
+        </span>
+
+
+    </p>
+    <a ng-click="more()" ng-show="schouldShowMoreButton()">More</a>
+
+    <!--zakładki w framework ui router-->
+</div>
+
+<!--<div ng-controller="photos as photo">-->
+<!--<img src="{{photo.oprasek}}">-->
+<!--</div>-->
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+
+<script src="app.js"></script>
+
+</html>

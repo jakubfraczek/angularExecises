@@ -5,7 +5,7 @@ angular.module("SDA", ['ngResource']).controller("users", function ($scope, $res
 
    // $resource('url:id');
 
-    var resource = $resource('http://jsonplaceholder.typicode.com/users/:user', {user: "@user"});
+    var resource = $resource('https://jsonplaceholder.typicode.com/users/:user');
 
     //get (adres url, co zrobić z tym co przyjdzie) - zwraca promise,
     // promise jest pusta poki zapytanie się nie wykona, następnie trzeba wywołać then

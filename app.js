@@ -1,13 +1,31 @@
-angular.module("SDA", []).controller("users", function ($scope, $http) {
+angular.module("SDA", ['ngResource']).controller("users", function ($scope, $resource) {
 
 
     //pobieranie z url
+
+   // $resource('url:id');
+
+    var resource = $resource('http://jsonplaceholder.typicode.com/users/:user', {user: "@user"});
+
     //get (adres url, co zrobić z tym co przyjdzie) - zwraca promise,
     // promise jest pusta poki zapytanie się nie wykona, następnie trzeba wywołać then
-    $http.get("https://jsonplaceholder.typicode.com/users").then(function (res) {
-        $scope.users = res.data;
+    // $http.get("https://jsonplaceholder.typicode.com/users").then(function (res) {
+    //     $scope.users = res.data;
+    //
+    // })
 
-    })
+    $scope.users = resource.query(function (users) { //pierwsza funkcja mówi o sukcesie a druga o błędzie
+    }, function() {
+        $scope.error = true;
+    });
+
+    //z dokumentacji rest - rest to pewnym standardem
+    //sposoby
+    //get -> /users/{id}
+    //post -> users
+    //delete -> /users/{id}
+    //put -> /users albo put -> /users/{id}
+
 
     $scope.more = function () {
         $scope.limit = $scope.limit + 10;
@@ -24,7 +42,7 @@ angular.module("SDA", []).controller("users", function ($scope, $http) {
     $scope.addUser = function () {
         $scope.users.push({
             username: $scope.newName,
-            role: $scope.newRole
+            phone: $scope.newRole
         })
         $scope.newName = "";
         $scope.newRole = "";
@@ -73,5 +91,6 @@ angular.module("SDA", []).controller("users", function ($scope, $http) {
 //        this.oprasek = "http://www.cezaryskorka.pl/lodz/pop/26.jpg"
 //    })
 
+//ng-cloack - chowa elementy strony
 
 //każdy controller robi sie każdy w osobnym pliku. Zbiera się wszystkie webpackiem
